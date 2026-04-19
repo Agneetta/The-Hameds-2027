@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agneetta & Seif 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pastel-green: #d1e7dd;
+            --pastel-pink: #f8d7da;
+            --pastel-blue: #cfe2ff;
+            --pastel-orange: #fff3cd;
+            --white: #ffffff;
+            --text-dark: #444;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        /* Password Overlay */
+        #password-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--pastel-blue);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Layout */
+        header {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--pastel-green), var(--pastel-blue));
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
+        h2 { font-family: 'Playfair Display', serif; font-weight: 300; }
+
+        section { padding: 80px 20px; }
+        .pink-bg { background-color: var(--pastel-pink); }
+        .orange-bg { background-color: var(--pastel-orange); }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            filter: grayscale(20%);
+            transition: 0.3s;
+        }
+
+        .gallery img:hover { filter: grayscale(0%); transform: scale(1.02); }
+
+        /* RSVP Form */
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button:hover { opacity: 0.9; }
+
+        #success-message { display: none; color: green; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="password-overlay">
+        <div class="login-box">
+            <h2 style="margin-top:0;">Welcome</h2>
+            <p>Please enter the password from your invitation:</p>
+            <input type="password" id="pass-input" placeholder="Hint: A Southern State">
+            <button onclick="checkPassword()">Enter Site</button>
+            <p id="err" style="color:red; display:none; margin-top:10px;">Incorrect password, please try again.</p>
+        </div>
+    </div>
+
+    <div id="main-content" style="display:none;">
+        <header>
+            <h1>Agneetta & Seif</h1>
+            <p>August 2026 • Dallas, Texas</p>
+        </header>
+
+        <section id="gallery">
+            <h2>Our Story</h2>
+            <div class="gallery">
+                <img src="https://via.placeholder.com/400x500" alt="Engagement 1">
+                <img src="https://via.placeholder.com/400x500" alt="Engagement 2">
+                <img src="https://via.placeholder.com/400x500" alt="Engagement 3">
+            </div>
+        </section>
+
+        <section class="pink-bg" id="rsvp">
+            <h2>RSVP</h2>
+            <form id="rsvp-form">
+                <label>Full Name</label>
+                <input type="text" name="name" required>
+                
+                <label>Attending?</label>
+                <select name="attending" required>
+                    <option value="Yes">Joyfully Accepts</option>
+                    <option value="No">Regretfully Declines</option>
+                </select>
+
+                <label>Dietary Restrictions</label>
+                <textarea name="diet" placeholder="Let us know..."></textarea>
+
+                <button type="submit" id="submit-btn">Send RSVP</button>
+                <div id="success-message">Thank you! Your RSVP has been sent.</div>
+            </form>
+        </section>
+
+        <section id="info">
+            <h2>Travel & FAQ</h2>
+            <p><strong>Registry:</strong> <a href="#">Link to Registry</a></p>
+            <p><strong>Hotel:</strong> Recommendations for Arlington and Dallas coming soon.</p>
+        </section>
+    </div>
+
+    <script>
+        // 1. Password Check
+        function checkPassword() {
+            const pass = document.getElementById('pass-input').value;
+            if (pass.toLowerCase() === 'virginia') {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById('err').style.display = 'block';
+            }
+        }
+
+        // 2. RSVP Form Submission
+        const scriptURL = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
+        const form = document.getElementById('rsvp-form');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            document.getElementById('submit-btn').innerHTML = "Sending...";
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('success-message').style.display = 'block';
+                    document.getElementById('submit-btn').style.display = 'none';
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+</body>
+</html>
