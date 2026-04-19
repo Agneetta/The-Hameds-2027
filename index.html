@@ -354,3 +354,93 @@
                 <h3>Will the events be indoors or outdoors?</h3>
                 <p>The ceremony will take place outdoors (weather permitting), and the reception will immediately follow indoors.</p>
             </div>
+
+            <div class="faq-item">
+                <h3>Is there parking available?</h3>
+                <p>Yes, there is ample complimentary parking available on-site at the venue. However, if you plan on celebrating with a few drinks, we highly recommend utilizing a rideshare service.</p>
+            </div>
+        </section>
+
+        <section id="Registry" class="tab-content">
+            <h2>Registry</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto; line-height: 1.8; color: #555;">
+                Your presence at our wedding is the greatest gift of all. However, if you wish to honor us with a gift, we have registered at the following places:
+            </p>
+            
+            <div class="registry-links">
+                <div class="registry-card">
+                    <h3>Crate & Barrel</h3>
+                    <a href="#" class="registry-link-btn">View Registry</a>
+                </div>
+                <div class="registry-card">
+                    <h3>Honeymoon</h3>
+                    <a href="#" class="registry-link-btn">Contribute</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Password Logic
+        function checkPassword() {
+            const pass = document.getElementById('pass-input').value;
+            if (pass === 'Virginia') {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById('err').style.display = 'block';
+            }
+        }
+
+        // Tab Switching Logic
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            // Slight delay to allow display:block to apply before animating opacity
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            
+            evt.currentTarget.className += " active";
+        }
+
+        // RSVP Submission Logic
+        const scriptURL = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
+        const form = document.getElementById('rsvp-form');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.innerHTML = "SUBMITTING...";
+            btn.disabled = true;
+            btn.style.opacity = "0.7";
+            
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    document.getElementById('success-message').style.display = 'block';
+                    btn.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    btn.innerHTML = "SUBMIT RSVP";
+                    btn.disabled = false;
+                    btn.style.opacity = "1";
+                    alert("There was an error submitting your RSVP. Please try again.");
+                });
+        });
+    </script>
+</body>
+</html>
