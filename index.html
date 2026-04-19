@@ -3,191 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agneetta & Seif 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Agneetta & Seif | Wedding Celebration</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
+        /* Floral Color Palette */
         :root {
-            --pastel-green: #d1e7dd;
-            --pastel-pink: #f8d7da;
-            --pastel-blue: #cfe2ff;
-            --pastel-orange: #fff3cd;
-            --white: #ffffff;
-            --text-dark: #444;
+            --moss-green: #5E6B34;
+            --dusty-rose: #C8828A;
+            --apricot: #E8B692;
+            --buttercream: #F5E6BE;
+            --bg-light: #FDFCF8;
+            --text-dark: #2C3026;
+            --white: #FFFFFF;
         }
 
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
             color: var(--text-dark);
-            background-color: var(--white);
-            text-align: center;
+            background-color: var(--bg-light);
+            font-weight: 300;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            color: var(--moss-green);
         }
 
         /* Password Overlay */
         #password-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--pastel-blue);
+            background: var(--bg-light);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
 
         .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: var(--white);
+            padding: 50px;
+            border-radius: 2px; /* Sharper corners look more high-end */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            text-align: center;
+            border-top: 4px solid var(--moss-green);
+            max-width: 400px;
+            width: 90%;
         }
 
-        /* Layout */
+        .login-box h2 {
+            font-size: 2.5rem;
+            margin-top: 0;
+        }
+
+        .login-box input {
+            font-family: 'Montserrat', sans-serif;
+            padding: 12px;
+            width: 80%;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            background-color: #fafafa;
+            border-radius: 0;
+            text-align: center;
+        }
+
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--moss-green);
+            color: var(--white);
+            border: none;
+            padding: 14px 30px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.4s ease;
+        }
+
+        .btn:hover { background-color: #4A542A; }
+
+        /* Header */
         header {
-            padding: 100px 20px;
-            background: linear-gradient(135deg, var(--pastel-green), var(--pastel-blue));
+            text-align: center;
+            padding: 60px 20px 30px;
+            background-color: var(--white);
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px; }
-        h2 { font-family: 'Playfair Display', serif; font-weight: 300; }
-
-        section { padding: 80px 20px; }
-        .pink-bg { background-color: var(--pastel-pink); }
-        .orange-bg { background-color: var(--pastel-orange); }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            max-width: 1000px;
-            margin: 0 auto;
+        header h1 {
+            font-size: 3.5rem;
+            margin: 0;
         }
 
-        .gallery img {
+        header p {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dusty-rose);
+            margin-top: 15px;
+        }
+
+        /* Horizontal Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            background-color: var(--white);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0;
+            gap: 10px;
+        }
+
+        .tab-link {
+            background: none;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-link:hover { color: var(--apricot); }
+        .tab-link.active {
+            color: var(--moss-green);
+            border-bottom: 2px solid var(--moss-green);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-placeholder {
             width: 100%;
-            border-radius: 10px;
-            filter: grayscale(20%);
-            transition: 0.3s;
+            max-width: 1100px;
+            height: 600px;
+            background-color: var(--buttercream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--apricot);
+            color: var(--moss-green);
+            font-style: italic;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
 
-        .gallery img:hover { filter: grayscale(0%); transform: scale(1.02); }
+        /* Dynamic Content Sections */
+        .tab-content {
+            display: none;
+            max-width: 800px;
+            margin: 20px auto 80px;
+            padding: 0 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active { display: block; }
+
+        .tab-content h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+        }
 
         /* RSVP Form */
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: left;
+        #rsvp-form {
+            background: var(--white);
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border-top: 3px solid var(--dusty-rose);
         }
 
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0 20px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .form-group { margin-bottom: 25px; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 10px; 
+            font-size: 13px; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--moss-green);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            font-family: 'Montserrat', sans-serif;
+            width: 100%; 
+            padding: 15px; 
+            border: 1px solid #e0e0e0; 
             box-sizing: border-box;
+            background-color: #fafafa;
         }
 
-        button {
-            background-color: var(--text-dark);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
+        /* FAQ */
+        .faq-item { 
+            margin-bottom: 35px; 
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .faq-item h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 15px; 
+            margin-top: 0;
+        }
+        .faq-item p { 
+            line-height: 1.8; 
+            margin: 0;
+            color: #555;
         }
 
-        button:hover { opacity: 0.9; }
+        /* Registry */
+        .registry-links { 
+            display: flex; 
+            justify-content: center; 
+            flex-wrap: wrap;
+            gap: 30px; 
+            margin-top: 40px; 
+        }
+        .registry-card {
+            padding: 40px;
+            border: 1px solid #eaeaea;
+            text-align: center;
+            background: var(--white);
+            width: 220px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .registry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: var(--apricot);
+        }
+        .registry-card h3 { font-size: 2rem; margin-top: 0; }
+        .registry-link-btn {
+            color: var(--dusty-rose);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            font-size: 13px;
+        }
 
-        #success-message { display: none; color: green; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <div id="password-overlay">
         <div class="login-box">
-            <h2 style="margin-top:0;">Welcome</h2>
-            <p>Please enter the password from your invitation:</p>
-            <input type="password" id="pass-input" placeholder="Hint: A Southern State">
-            <button onclick="checkPassword()">Enter Site</button>
-            <p id="err" style="color:red; display:none; margin-top:10px;">Incorrect password, please try again.</p>
+            <h2>Welcome</h2>
+            <p style="margin-bottom: 30px; color: #777;">Please enter the password to access our wedding website.</p>
+            <input type="password" id="pass-input" placeholder="Password">
+            <br>
+            <button class="btn" onclick="checkPassword()">Enter</button>
+            <p id="err" style="color:var(--dusty-rose); display:none; margin-top:20px; font-weight: 500;">Incorrect password. Please try again.</p>
         </div>
     </div>
 
     <div id="main-content" style="display:none;">
+        
         <header>
             <h1>Agneetta & Seif</h1>
-            <p>August 2026 • Dallas, Texas</p>
+            <p>Dallas, Texas</p>
         </header>
 
-        <section id="gallery">
-            <h2>Our Story</h2>
-            <div class="gallery">
-                <img src="https://via.placeholder.com/400x500" alt="Engagement 1">
-                <img src="https://via.placeholder.com/400x500" alt="Engagement 2">
-                <img src="https://via.placeholder.com/400x500" alt="Engagement 3">
+        <div class="nav-tabs">
+            <button class="tab-link active" onclick="openTab(event, 'Gallery')">Gallery</button>
+            <button class="tab-link" onclick="openTab(event, 'RSVP')">RSVP</button>
+            <button class="tab-link" onclick="openTab(event, 'FAQ')">FAQ</button>
+            <button class="tab-link" onclick="openTab(event, 'Registry')">Registry</button>
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-placeholder">
+                <h2>[ Insert Large Featured Image Here ]</h2>
             </div>
         </section>
 
-        <section class="pink-bg" id="rsvp">
+        <section id="Gallery" class="tab-content active">
+            <h2>Our Story</h2>
+            <p style="text-align: center; line-height: 2; color: #555;">
+                Welcome to our wedding website! We are so thrilled to celebrate this next chapter of our lives with you. 
+                [Add a brief paragraph here about how you met, the proposal, and what you are looking forward to most about the wedding day.]
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px;">
+                <div style="background: #f0f0f0; height: 400px; display: flex; align-items: center; justify-content: center; color: #aaa;">[Image]</div>
+                <div style="background: #f0f0f0; height: 400px; display: flex; align-items: center; justify-content: center; color: #aaa;">[Image]</div>
+            </div>
+        </section>
+
+        <section id="RSVP" class="tab-content">
             <h2>RSVP</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #555; letter-spacing: 1px;">Kindly respond by October 1st.</p>
+            
             <form id="rsvp-form">
-                <label>Full Name</label>
-                <input type="text" name="name" required>
+                <div class="form-group">
+                    <label>Guest Full Name(s)</label>
+                    <input type="text" name="name" required placeholder="John & Jane Doe">
+                </div>
                 
-                <label>Attending?</label>
-                <select name="attending" required>
-                    <option value="Yes">Joyfully Accepts</option>
-                    <option value="No">Regretfully Declines</option>
-                </select>
+                <div class="form-group">
+                    <label>Will you be attending?</label>
+                    <select name="attending" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="Joyfully Accepts">Joyfully Accepts</option>
+                        <option value="Regretfully Declines">Regretfully Declines</option>
+                    </select>
+                </div>
 
-                <label>Dietary Restrictions</label>
-                <textarea name="diet" placeholder="Let us know..."></textarea>
+                <div class="form-group">
+                    <label>Dietary Restrictions</label>
+                    <textarea name="diet" rows="4" placeholder="Please list any dietary needs or allergies..."></textarea>
+                </div>
 
-                <button type="submit" id="submit-btn">Send RSVP</button>
-                <div id="success-message">Thank you! Your RSVP has been sent.</div>
+                <button type="submit" class="btn" id="submit-btn" style="width: 100%;">Submit RSVP</button>
+                <div id="success-message" style="display: none; color: var(--moss-green); font-weight: 500; margin-top: 25px; text-align: center; font-size: 1.1rem;">
+                    Thank you! Your RSVP has been received.
+                </div>
             </form>
         </section>
 
-        <section id="info">
-            <h2>Travel & FAQ</h2>
-            <p><strong>Registry:</strong> <a href="#">Link to Registry</a></p>
-            <p><strong>Hotel:</strong> Recommendations for Arlington and Dallas coming soon.</p>
-        </section>
-    </div>
-
-    <script>
-        // 1. Password Check
-        function checkPassword() {
-            const pass = document.getElementById('pass-input').value;
-            if (pass.toLowerCase() === 'virginia') {
-                document.getElementById('password-overlay').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-            } else {
-                document.getElementById('err').style.display = 'block';
-            }
-        }
-
-        // 2. RSVP Form Submission
-        const scriptURL = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
-        const form = document.getElementById('rsvp-form');
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            document.getElementById('submit-btn').innerHTML = "Sending...";
+        <section id="FAQ" class="tab-content">
+            <h2>Frequently Asked Questions</h2>
             
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    document.getElementById('success-message').style.display = 'block';
-                    document.getElementById('submit-btn').style.display = 'none';
-                })
-                .catch(error => console.error('Error!', error.message));
-        });
-    </script>
-</body>
-</html>
+            <div class="faq-item">
+                <h3>What is the dress code?</h3>
+                <p>We kindly request semi-formal attire for our celebration. For men, this means a suit and tie. For women, a cocktail dress, an elegant slip dress, or a formal jumpsuit.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I bring a plus one?</h3>
+                <p>Due to venue capacity, we are only able to accommodate the guests formally named on your invitation envelope. If your invitation says "and Guest," you are welcome to bring a plus one.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Are children invited?</h3>
+                <p>While we adore your little ones, our wedding will be an adults-only event so that everyone can relax and enjoy the evening.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will the events be indoors or outdoors?</h3>
+                <p>The ceremony will take place outdoors (weather permitting), and the reception will immediately follow indoors.</p>
+            </div>
